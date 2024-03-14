@@ -1,7 +1,7 @@
  # @Author: Min Li
  # @Email: mli.bio@outlook.com
  # @Last Modified by: Min Li
- # @Timestamp for Last Modification: 2024-03-14 11:29:00
+ # @Timestamp for Last Modification: 2024-03-14 16:46:26
  # @Description: This R code file is used to obtain the final target_drug_indication form of DrugBank.
 
 library(tidyverse)
