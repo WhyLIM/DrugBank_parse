@@ -1,4 +1,9 @@
-# 船新版本
+ # @Author: Min Li
+ # @Email: mli.bio@outlook.com
+ # @Last Modified by: Min Li
+ # @Timestamp for Last Modification: 2024-03-14 16:49:48
+ # @Description: 船新版本，使用 lxml 库解析 XML
+
 from lxml import etree
 
 # 解析 XML 文件
