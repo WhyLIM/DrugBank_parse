@@ -1,7 +1,7 @@
  # @Author: Min Li
  # @Email: mli.bio@outlook.com
  # @Last Modified by: Min Li
- # @Timestamp for Last Modification: 2024-03-14 16:49:48
+ # @Timestamp for Last Modification: 2024-03-15 15:31:02
  # @Description: 船新版本，使用 lxml 库解析 XML
 
 from lxml import etree
@@ -19,11 +19,11 @@ drugs = tree.xpath('/db:drugbank/db:drug', namespaces=nameSpaces)
 allDrugs = []
 
 for drug in drugs:
-    drugbankId = drug.xpath('db:drugbank-id[@primary="true"]/text()', namespaces=nameSpaces)
+    drugbankID = drug.xpath('db:drugbank-id[@primary="true"]/text()', namespaces=nameSpaces)
     # 药物名称
     drugName = drug.xpath('db:name/text()', namespaces=nameSpaces)
     # 药物描述
-    description = drug.xpath('db:description/text()', namespaces=nameSpaces)
+    drugDescription = drug.xpath('db:description/text()', namespaces=nameSpaces)
     # 参考文献信息
     drugReferences = drug.xpath("db:general-references/db:articles/db:article", namespaces=nameSpaces)
     drugRefs = []
@@ -45,7 +45,7 @@ for drug in drugs:
         name = dgInt.find('db:name', namespaces=nameSpaces).text if dgInt.find('db:name', namespaces=nameSpaces) is not None else None
         description = dgInt.find('db:description', namespaces=nameSpaces).text if dgInt.find('db:description', namespaces=nameSpaces) is not None else None
         drugInter.append({
-            'Interaction_DrugBankID': interdbID,
+            'Interaction_drugbankID': interdbID,
             'Interaction_drugName': name,
             'Interaction_description': description
         })
@@ -88,7 +88,7 @@ for drug in drugs:
         snps.append({
             'proteinName': proteinName,
             'geneSymbol': geneSymbol,
-            'UniProtAC': UniProtID,
+            'UniProtID': UniProtID,
             'rsID': rsID,
             'definingChange': definingChange,
             'description': description,
@@ -96,9 +96,10 @@ for drug in drugs:
         })
 
     # 靶标
-    targets = tree.xpath("//db:drug/db:targets/db:target", namespaces=nameSpaces)
+    targets = drug.xpath("db:targets/db:target", namespaces=nameSpaces)
     drugTarget = []
     for target in targets:
+        # targetDBID = drug.xpath('db:id', namespaces=nameSpaces).text if drug.xpath('db:id', namespaces=nameSpaces) is not None else None
         targetDBID = target.find('db:id', namespaces=nameSpaces).text if target.find('db:id', namespaces=nameSpaces) is not None else None
         targetName = target.find('db:name', namespaces=nameSpaces).text if target.find('db:name', namespaces=nameSpaces) is not None else None
         targetOrganism = target.find('db:organism', namespaces=nameSpaces).text if target.find('db:organism', namespaces=nameSpaces) is not None else None
@@ -180,9 +181,9 @@ for drug in drugs:
         })
 
     allDrugs.append({
-        'DrugBankID': drugbankId,
+        'DrugBankID': drugbankID,
         'drugName': drugName,
-        'description': description,
+        'description': drugDescription,
         'drugReferences': drugRefs,
         'indication': indication,
         'drugInteractions': drugInter,
