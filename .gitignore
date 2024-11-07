@@ -1,2 +1,4 @@
-drugbank_5-1-9.xml
+drugbank_5-1-*.xml
 DrugBank.ipynb
+*.csv
+.Rhistory

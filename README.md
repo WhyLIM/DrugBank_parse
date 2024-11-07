@@ -7,6 +7,7 @@
 
 - `v1`: An early version with fast parsing speed but obscure code.
 - `v2`: Improved legibility, but slower file processing.
+- `vR`: R version, much slower than the python version (about 25 times) and takes up very little memory (about 20M) during runtime.
 - `dev`: Development version, using the `lxml` library to rewrite the parsing logic. ***Not finished yet***.
 
 ## File Description
@@ -15,7 +16,7 @@
 - `DrugBank_TDI.R`: This script is used to obtain the final target_drug_indication form of DrugBank.
 - `test-database.xml`: A small test xml file containing the first drug of the xml file provided by the drugbank database.
 
-You can get the xml file on https://go.drugbank.com/releases/latest. The current code is based upon release v5.1.9.
+You can get the xml file on https://go.drugbank.com/releases/latest. The current code has tested on release v5.1.12.
 
 Detailed introductions can be found in the comments at the beginning of these scripts.
 
