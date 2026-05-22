@@ -1,3 +1,4 @@
+from .exporters import write_drugbank_tables
 from .models import ParseResult
 from .parser import parse_drugbank_xml
 from .profiles import resolve_modules, resolve_tables
@@ -9,4 +10,5 @@ __all__ = [
     "parse_drugbank_xml",
     "resolve_modules",
     "resolve_tables",
+    "write_drugbank_tables",
 ]
