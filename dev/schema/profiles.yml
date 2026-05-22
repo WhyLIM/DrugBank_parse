@@ -1,0 +1,13 @@
+version: 1
+profiles:
+  core:
+    modules:
+      - core
+modules:
+  core:
+    tables:
+      - drugs
+      - targets
+      - drug_target
+      - drug_indication
+      - target_drug_indication

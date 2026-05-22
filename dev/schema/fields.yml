@@ -1,0 +1,11 @@
+version: 1
+fields:
+  drug_id: Primary DrugBank identifier.
+  drug_name: Drug display name.
+  inchi: InChI calculated property when available.
+  indication: Drug indication text.
+  target_id: Target polypeptide identifier, usually a UniProt accession.
+  target_name: DrugBank target name.
+  gene_name: Gene symbol associated with a target polypeptide.
+  organism: Target organism.
+  source: Data source label.
