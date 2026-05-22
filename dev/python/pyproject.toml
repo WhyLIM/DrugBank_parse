@@ -18,6 +18,9 @@ test = [
   "pytest>=8.0",
 ]
 
+[project.scripts]
+drugbank-parse = "drugbank_parse.cli:main"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
