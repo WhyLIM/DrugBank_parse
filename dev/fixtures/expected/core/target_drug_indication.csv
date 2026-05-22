@@ -1,0 +1,16 @@
+target_id,gene_name,drug_id,drug_name,inchi,indication,source
+P00734,F2,DB00001,Lepirudin,,For the treatment of heparin-induced thrombocytopenia,DrugBank
+P22888,LHCGR,DB00014,Goserelin,"InChI=1S/C59H84N18O14/c1-31(2)22-40(49(82)68-39(12-8-20-64-57(60)61)56(89)77-21-9-13-46(77)55(88)75-76-58(62)90)69-54(87)45(29-91-59(3,4)5)74-50(83)41(23-32-14-16-35(79)17-15-32)70-53(86)44(28-78)73-51(84)42(24-33-26-65-37-11-7-6-10-36(33)37)71-52(85)43(25-34-27-63-30-66-34)72-48(81)38-18-19-47(80)67-38/h6-7,10-11,14-17,26-27,30-31,38-46,65,78-79H,8-9,12-13,18-25,28-29H2,1-5H3,(H,63,66)(H,67,80)(H,68,82)(H,69,87)(H,70,86)(H,71,85)(H,72,81)(H,73,84)(H,74,83)(H,75,88)(H4,60,61,64)(H3,62,76,90)/t38-,39-,40-,41-,42-,43-,44-,45+,46-/m0/s1","Goserelin is indicated for:
+
+- Use in combination with flutamide for the management of locally confined carcinoma of the prostate
+- Palliative treatment of advanced carcinoma of the prostate
+- The management of endometriosis
+- Use as an endometrial-thinning agent prior to endometrial ablation for dysfunctional uterine bleeding
+- Use in the palliative treatment of advanced breast cancer in pre- and perimenopausal women",DrugBank
+P30968,GNRHR,DB00014,Goserelin,"InChI=1S/C59H84N18O14/c1-31(2)22-40(49(82)68-39(12-8-20-64-57(60)61)56(89)77-21-9-13-46(77)55(88)75-76-58(62)90)69-54(87)45(29-91-59(3,4)5)74-50(83)41(23-32-14-16-35(79)17-15-32)70-53(86)44(28-78)73-51(84)42(24-33-26-65-37-11-7-6-10-36(33)37)71-52(85)43(25-34-27-63-30-66-34)72-48(81)38-18-19-47(80)67-38/h6-7,10-11,14-17,26-27,30-31,38-46,65,78-79H,8-9,12-13,18-25,28-29H2,1-5H3,(H,63,66)(H,67,80)(H,68,82)(H,69,87)(H,70,86)(H,71,85)(H,72,81)(H,73,84)(H,74,83)(H,75,88)(H4,60,61,64)(H3,62,76,90)/t38-,39-,40-,41-,42-,43-,44-,45+,46-/m0/s1","Goserelin is indicated for:
+
+- Use in combination with flutamide for the management of locally confined carcinoma of the prostate
+- Palliative treatment of advanced carcinoma of the prostate
+- The management of endometriosis
+- Use as an endometrial-thinning agent prior to endometrial ablation for dysfunctional uterine bleeding
+- Use in the palliative treatment of advanced breast cancer in pre- and perimenopausal women",DrugBank
