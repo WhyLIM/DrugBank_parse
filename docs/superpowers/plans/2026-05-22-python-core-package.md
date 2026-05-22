@@ -246,9 +246,6 @@ test = [
   "pytest>=8.0",
 ]
 
-[project.scripts]
-drugbank-parse = "drugbank_parse.cli:main"
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
@@ -1056,7 +1053,16 @@ if __name__ == "__main__":
     raise SystemExit(main())
 ```
 
-- [ ] **Step 4: Run CLI test and full test suite**
+- [ ] **Step 4: Register console script**
+
+Update `dev/python/pyproject.toml`:
+
+```toml
+[project.scripts]
+drugbank-parse = "drugbank_parse.cli:main"
+```
+
+- [ ] **Step 5: Run CLI test and full test suite**
 
 Run:
 
@@ -1068,7 +1074,7 @@ python -m pytest -q
 
 Expected: PASS.
 
-- [ ] **Step 5: Manually smoke test CLI against fixture**
+- [ ] **Step 6: Manually smoke test CLI against fixture**
 
 Run:
 
@@ -1079,7 +1085,7 @@ python -m drugbank_parse.cli --input ..\..\test-database.xml --profile core --ou
 
 Expected: prints five CSV paths under `dev\tmp_core_output`.
 
-- [ ] **Step 6: Remove manual smoke output**
+- [ ] **Step 7: Remove manual smoke output**
 
 Run:
 
@@ -1089,7 +1095,7 @@ Remove-Item ..\tmp_core_output -Recurse -Force
 
 Expected: temporary output directory is removed. Verify the resolved path is `D:\Study\Project\DrugBank_parse\dev\tmp_core_output` before running the command.
 
-- [ ] **Step 7: Commit CLI wrapper**
+- [ ] **Step 8: Commit CLI wrapper**
 
 Run:
 
