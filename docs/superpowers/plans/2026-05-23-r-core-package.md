@@ -178,7 +178,7 @@ expected_core_dir <- function() {
 Run from `dev/R`:
 
 ```powershell
-Rscript -e "testthat::test_dir('tests/testthat')"
+Rscript -e "testthat::test_local(reporter='summary')"
 ```
 
 Expected: FAIL because exported functions do not exist yet.
@@ -246,7 +246,7 @@ test_that("resolve_tables preserves core table order", {
 Run from `dev/R`:
 
 ```powershell
-Rscript -e "testthat::test_file('tests/testthat/test-schema.R')"
+Rscript -e "pkgload::load_all('.'); testthat::test_file('tests/testthat/test-schema.R')"
 ```
 
 Expected: FAIL because schema functions do not exist.
@@ -346,7 +346,7 @@ resolve_tables <- function(modules, schema_dir = NULL) {
 Run from `dev/R`:
 
 ```powershell
-Rscript -e "testthat::test_file('tests/testthat/test-schema.R')"
+Rscript -e "pkgload::load_all('.'); testthat::test_file('tests/testthat/test-schema.R')"
 ```
 
 Expected: PASS.
@@ -396,7 +396,7 @@ test_that("append_row rejects tables outside selected profile", {
 Run from `dev/R`:
 
 ```powershell
-Rscript -e "testthat::test_file('tests/testthat/test-result.R')"
+Rscript -e "pkgload::load_all('.'); testthat::test_file('tests/testthat/test-result.R')"
 ```
 
 Expected: FAIL because result functions do not exist.
@@ -430,7 +430,7 @@ append_row <- function(result, table, row) {
 Run:
 
 ```powershell
-Rscript -e "testthat::test_file('tests/testthat/test-result.R')"
+Rscript -e "pkgload::load_all('.'); testthat::test_file('tests/testthat/test-result.R')"
 ```
 
 Expected: PASS.
@@ -518,7 +518,7 @@ test_that("parse_drugbank_xml fails clearly for missing file", {
 Run from `dev/R`:
 
 ```powershell
-Rscript -e "testthat::test_file('tests/testthat/test-parser-core.R')"
+Rscript -e "pkgload::load_all('.'); testthat::test_file('tests/testthat/test-parser-core.R')"
 ```
 
 Expected: FAIL because parser does not exist.
@@ -664,7 +664,7 @@ If `xml2::xml_event_parse()` path matching with namespaces does not trigger for 
 Run:
 
 ```powershell
-Rscript -e "testthat::test_file('tests/testthat/test-parser-core.R')"
+Rscript -e "pkgload::load_all('.'); testthat::test_file('tests/testthat/test-parser-core.R')"
 ```
 
 Expected: PASS.
@@ -740,7 +740,7 @@ test_that("R exported core CSVs match shared expected fixture files", {
 Run from `dev/R`:
 
 ```powershell
-Rscript -e "testthat::test_file('tests/testthat/test-exporters.R')"
+Rscript -e "pkgload::load_all('.'); testthat::test_file('tests/testthat/test-exporters.R')"
 ```
 
 Expected: FAIL because `write_drugbank_tables()` does not exist.
@@ -783,8 +783,8 @@ write_drugbank_tables <- function(result, outdir, schema_dir = NULL) {
 Run from `dev/R`:
 
 ```powershell
-Rscript -e "testthat::test_file('tests/testthat/test-exporters.R')"
-Rscript -e "testthat::test_dir('tests/testthat')"
+Rscript -e "pkgload::load_all('.'); testthat::test_file('tests/testthat/test-exporters.R')"
+Rscript -e "testthat::test_local(reporter='summary')"
 ```
 
 Expected: PASS.
@@ -820,7 +820,7 @@ This package is the R implementation of the DrugBank core parser. It reads the s
 From `dev/R`:
 
 ```powershell
-Rscript -e "testthat::test_dir('tests/testthat')"
+Rscript -e "testthat::test_local(reporter='summary')"
 ```
 
 ## Use The Parser
@@ -853,7 +853,7 @@ The R implementation lives in `dev/R` and targets the same shared schema and exp
 Run R tests from `dev/R`:
 
 ```powershell
-Rscript -e "testthat::test_dir('tests/testthat')"
+Rscript -e "testthat::test_local(reporter='summary')"
 ```
 ```
 
@@ -889,7 +889,7 @@ git commit -m "docs: document R core parser"
 Run from `dev/R`:
 
 ```powershell
-Rscript -e "testthat::test_dir('tests/testthat')"
+Rscript -e "testthat::test_local(reporter='summary')"
 ```
 
 Expected: PASS.

@@ -4,7 +4,9 @@ This directory contains the new package-first DrugBank XML parsers.
 
 ## Python Core Parser
 
-Install test dependencies from `dev/python`:
+Run these commands from `dev/python`.
+
+Install test dependencies:
 
 ```powershell
 python -m pip install -e ".[test]"
@@ -29,6 +31,25 @@ from drugbank_parse import parse_drugbank_xml, write_drugbank_tables
 
 result = parse_drugbank_xml("drugbank_5-1-12.xml", profile="core")
 write_drugbank_tables(result, "output")
+```
+
+## R Core Parser
+
+The R implementation lives in `dev/R` and targets the same shared schema and expected core fixture CSVs as the Python package.
+
+Run R tests from `dev/R`:
+
+```powershell
+Rscript -e "testthat::test_local(reporter='summary')"
+```
+
+Parse the bundled fixture from `dev/R`:
+
+```r
+library(drugbankparse)
+
+result <- parse_drugbank_xml("../../test-database.xml", schema_dir = "../schema")
+write_drugbank_tables(result, "tmp_r_core_output", schema_dir = "../schema")
 ```
 
 ## Core Output Tables
