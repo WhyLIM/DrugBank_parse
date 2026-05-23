@@ -43,6 +43,15 @@ Run R tests from `dev/R`:
 Rscript -e "testthat::test_local(reporter='summary')"
 ```
 
+Parse the bundled fixture from `dev/R`:
+
+```r
+library(drugbankparse)
+
+result <- parse_drugbank_xml("../../test-database.xml", schema_dir = "../schema")
+write_drugbank_tables(result, "tmp_r_core_output", schema_dir = "../schema")
+```
+
 ## Core Output Tables
 
 - `drugs.csv`

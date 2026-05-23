@@ -18,7 +18,7 @@ From `dev/R`, after installing or loading the package:
 library(drugbankparse)
 
 result <- parse_drugbank_xml("../../test-database.xml", schema_dir = "../schema")
-write_drugbank_tables(result, "../tmp_r_core_output", schema_dir = "../schema")
+write_drugbank_tables(result, "tmp_r_core_output", schema_dir = "../schema")
 ```
 
 ## Core Output Tables
