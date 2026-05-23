@@ -4,7 +4,9 @@ This directory contains the new package-first DrugBank XML parsers.
 
 ## Python Core Parser
 
-Install test dependencies from `dev/python`:
+Run these commands from `dev/python`.
+
+Install test dependencies:
 
 ```powershell
 python -m pip install -e ".[test]"

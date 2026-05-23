@@ -12,6 +12,8 @@ Rscript -e "testthat::test_local(reporter='summary')"
 
 ## Use The Parser
 
+From `dev/R`, after installing or loading the package:
+
 ```r
 library(drugbankparse)
 
