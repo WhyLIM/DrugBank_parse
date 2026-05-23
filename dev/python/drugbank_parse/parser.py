@@ -33,12 +33,14 @@ def parse_drugbank_xml(
     )
 
     for _, drug_node in context:
-        _extract_core_drug(drug_node, result)
+        if "core" in selected_modules:
+            _extract_core_drug(drug_node, result)
         while drug_node.getprevious() is not None:
             del drug_node.getparent()[0]
         drug_node.clear()
 
-    _deduplicate_table(result, "targets", key_fields=("target_id",))
+    if "targets" in result.tables:
+        _deduplicate_table(result, "targets", key_fields=("target_id",))
     return result
 
 

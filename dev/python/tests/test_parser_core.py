@@ -15,6 +15,12 @@ def test_parse_core_result_contains_expected_tables(root_fixture_xml):
     }
 
 
+def test_parse_with_empty_modules_does_not_emit_core_tables(root_fixture_xml):
+    result = parse_drugbank_xml(root_fixture_xml, modules=[])
+
+    assert result.tables == {}
+
+
 def test_parse_core_extracts_first_drug(root_fixture_xml):
     result = parse_drugbank_xml(root_fixture_xml)
 

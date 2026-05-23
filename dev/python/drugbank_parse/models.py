@@ -23,7 +23,9 @@ class ParseResult:
     tables: dict[str, list[dict[str, str]]] = field(default_factory=dict)
 
     def add_row(self, table: str, row: dict[str, str]) -> None:
-        self.tables.setdefault(table, []).append(row)
+        if table not in self.tables:
+            raise KeyError(f"Table is not enabled for this parse result: {table}")
+        self.tables[table].append(row)
 
     def rows(self, table: str) -> list[dict[str, str]]:
         return self.tables.get(table, [])

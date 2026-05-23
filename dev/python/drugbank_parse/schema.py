@@ -8,7 +8,7 @@ from .models import DrugBankSchema, TableSchema
 
 
 def default_schema_dir() -> Path:
-    return Path(__file__).resolve().parents[2] / "schema"
+    return Path(__file__).resolve().parent / "schema_data"
 
 
 def load_schema(schema_dir: str | Path | None = None) -> DrugBankSchema:

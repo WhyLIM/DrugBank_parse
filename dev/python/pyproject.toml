@@ -20,6 +20,12 @@ test = [
 [project.scripts]
 drugbank-parse = "drugbank_parse.cli:main"
 
+[tool.setuptools.package-data]
+drugbank_parse = ["schema_data/*.yml"]
+
+[tool.setuptools.packages.find]
+include = ["drugbank_parse*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
