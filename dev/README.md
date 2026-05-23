@@ -31,6 +31,16 @@ result = parse_drugbank_xml("drugbank_5-1-12.xml", profile="core")
 write_drugbank_tables(result, "output")
 ```
 
+## R Core Parser
+
+The R implementation lives in `dev/R` and targets the same shared schema and expected core fixture CSVs as the Python package.
+
+Run R tests from `dev/R`:
+
+```powershell
+Rscript -e "testthat::test_local(reporter='summary')"
+```
+
 ## Core Output Tables
 
 - `drugs.csv`
