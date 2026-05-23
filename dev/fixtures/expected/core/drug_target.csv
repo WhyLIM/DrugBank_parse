@@ -1,0 +1,4 @@
+drug_id,target_id,source
+DB00001,P00734,DrugBank
+DB00014,P22888,DrugBank
+DB00014,P30968,DrugBank

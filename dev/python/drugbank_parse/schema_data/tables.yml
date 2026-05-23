@@ -1,0 +1,57 @@
+version: 1
+tables:
+  drugs:
+    description: One row per primary DrugBank drug.
+    columns:
+      - drug_id
+      - drug_name
+      - inchi
+      - source
+    required:
+      - drug_id
+      - drug_name
+      - source
+  targets:
+    description: One row per target polypeptide identifier.
+    columns:
+      - target_id
+      - target_name
+      - gene_name
+      - organism
+      - source
+    required:
+      - target_id
+      - source
+  drug_target:
+    description: One row per drug-target relationship.
+    columns:
+      - drug_id
+      - target_id
+      - source
+    required:
+      - drug_id
+      - target_id
+      - source
+  drug_indication:
+    description: One row per drug and indication text.
+    columns:
+      - drug_id
+      - indication
+      - source
+    required:
+      - drug_id
+      - source
+  target_drug_indication:
+    description: Denormalized target-drug-indication table.
+    columns:
+      - target_id
+      - gene_name
+      - drug_id
+      - drug_name
+      - inchi
+      - indication
+      - source
+    required:
+      - target_id
+      - drug_id
+      - source

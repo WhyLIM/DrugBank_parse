@@ -1,0 +1,9 @@
+drug_id,indication,source
+DB00001,For the treatment of heparin-induced thrombocytopenia,DrugBank
+DB00014,"Goserelin is indicated for:
+
+- Use in combination with flutamide for the management of locally confined carcinoma of the prostate
+- Palliative treatment of advanced carcinoma of the prostate
+- The management of endometriosis
+- Use as an endometrial-thinning agent prior to endometrial ablation for dysfunctional uterine bleeding
+- Use in the palliative treatment of advanced breast cancer in pre- and perimenopausal women",DrugBank

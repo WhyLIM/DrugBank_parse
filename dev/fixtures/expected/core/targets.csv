@@ -1,0 +1,4 @@
+target_id,target_name,gene_name,organism,source
+P00734,Prothrombin,F2,Humans,DrugBank
+P22888,Lutropin-choriogonadotropic hormone receptor,LHCGR,Humans,DrugBank
+P30968,Gonadotropin-releasing hormone receptor,GNRHR,Humans,DrugBank
