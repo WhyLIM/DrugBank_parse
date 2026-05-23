@@ -3,6 +3,10 @@
 > Get information on drugs, targets and indications in DrugBank from downloaded XML file.
 > Inspired by https://github.com/Deshan-Zhou/deal_DrugBank.
 
+## Current Rewrite
+
+The new implementation is being developed under `dev/`. It is package-first, schema-driven, and designed for low-memory parsing of full DrugBank XML files. See `dev/README.md` for the Python core parser workflow.
+
 ## Folder Description
 
 - `v1`: An early version with fast parsing speed but obscure code.

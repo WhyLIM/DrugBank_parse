@@ -6,7 +6,6 @@ build-backend = "setuptools.build_meta"
 name = "drugbank-parse"
 version = "0.1.0"
 description = "Low-memory DrugBank XML parser."
-readme = "../../README.md"
 requires-python = ">=3.9"
 dependencies = [
   "lxml>=4.9",
