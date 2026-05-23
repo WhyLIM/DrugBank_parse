@@ -1,0 +1,16 @@
+Package: drugbankparse
+Title: Low-Memory DrugBank XML Parser
+Version: 0.1.0
+Authors@R: person("Min", "Li", email = "mli.bio@outlook.com", role = c("aut", "cre"))
+Description: Parses DrugBank XML files into schema-defined core tables.
+License: MIT
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    readr,
+    xml2,
+    yaml
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
