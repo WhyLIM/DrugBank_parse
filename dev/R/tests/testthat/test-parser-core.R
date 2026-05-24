@@ -30,6 +30,38 @@ test_that("parse_core_extracts_first_drug", {
   expect_equal(drugs$source[1], "DrugBank")
 })
 
+test_that("parse_core_does_not_load_the_full_xml_document", {
+  trace(
+    "read_xml",
+    where = asNamespace("xml2"),
+    tracer = quote(stop("xml2::read_xml should not be used by the streaming parser")),
+    print = FALSE
+  )
+  on.exit(untrace("read_xml", where = asNamespace("xml2")), add = TRUE)
+
+  result <- parse_drugbank_xml(fixture_xml(), schema_dir = shared_schema_dir())
+
+  expect_equal(nrow(result$drugs), 2)
+})
+
+test_that("parse_core_normalizes_crlf_text_nodes", {
+  xml <- paste0(
+    "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+    "<drugbank xmlns=\"http://www.drugbank.ca\">",
+    "<drug><drugbank-id primary=\"true\">DBTEST</drugbank-id>",
+    "<name>CRLF Test</name>",
+    "<indication>First line\r\n\r\nSecond line</indication>",
+    "<targets/></drug></drugbank>"
+  )
+  path <- tempfile(fileext = ".xml")
+  writeBin(charToRaw(xml), path)
+
+  result <- parse_drugbank_xml(path, schema_dir = shared_schema_dir())
+
+  expect_false(grepl("\r", result$drug_indication$indication[1], fixed = TRUE))
+  expect_equal(result$drug_indication$indication[1], "First line\n\nSecond line")
+})
+
 test_that("parse_core_extracts_target_relationships", {
   result <- parse_drugbank_xml(fixture_xml(), schema_dir = shared_schema_dir())
 

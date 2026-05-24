@@ -1,34 +1,26 @@
-drugbank_xml_ns <- function() {
-  c(d = "http://www.drugbank.ca")
-}
-
 xml_text_first <- function(node, xpath) {
-  found <- xml2::xml_find_first(node, xpath, ns = drugbank_xml_ns())
-  if (inherits(found, "xml_missing")) {
+  values <- XML::xpathSApply(node, xpath, XML::xmlValue)
+  if (length(values) == 0) {
     return("")
   }
-  xml2::xml_text(found, trim = TRUE)
+  trimws(gsub("\r\n?", "\n", values[[1]]))
 }
 
 xml_attr_first <- function(node, xpath, attr) {
-  found <- xml2::xml_find_first(node, xpath, ns = drugbank_xml_ns())
-  if (inherits(found, "xml_missing")) {
+  found <- XML::getNodeSet(node, xpath)
+  if (length(found) == 0) {
     return("")
   }
-  value <- xml2::xml_attr(found, attr)
+  value <- XML::xmlGetAttr(found[[1]], attr, default = "")
   if (is.na(value)) "" else value
 }
 
 calculated_property <- function(drug_node, kind) {
-  property_nodes <- xml2::xml_find_all(
-    drug_node,
-    "d:calculated-properties/d:property",
-    ns = drugbank_xml_ns()
-  )
+  property_nodes <- XML::getNodeSet(drug_node, "calculated-properties/property")
 
   for (property_node in property_nodes) {
-    if (identical(xml_text_first(property_node, "d:kind"), kind)) {
-      return(xml_text_first(property_node, "d:value"))
+    if (identical(xml_text_first(property_node, "kind"), kind)) {
+      return(xml_text_first(property_node, "value"))
     }
   }
   ""
@@ -51,28 +43,31 @@ parse_drugbank_xml <- function(path, profile = "core", modules = NULL, schema_di
     return(unname(result))
   }
 
-  # Fixture-sized fallback: this loads the XML tree. Restore streaming
-  # xml_event_parse() before full DrugBank benchmarks.
-  doc <- xml2::read_xml(path)
-  drug_nodes <- xml2::xml_find_all(doc, "/d:drugbank/d:drug", ns = drugbank_xml_ns())
-
   if ("core" %in% selected_modules) {
-    for (drug_node in drug_nodes) {
-      result <- extract_core_drug(drug_node, result)
+    handle_drug <- function(drug_node, ...) {
+      result <<- extract_core_drug(drug_node, result)
+      FALSE
     }
+    XML::xmlEventParse(
+      path,
+      branches = list(drug = handle_drug),
+      useTagName = TRUE,
+      addContext = FALSE,
+      trim = FALSE
+    )
   }
 
   deduplicate_table(result, "targets", key_fields = "target_id")
 }
 
 extract_core_drug <- function(drug_node, result) {
-  drug_id <- xml_text_first(drug_node, "d:drugbank-id[@primary='true']")
+  drug_id <- xml_text_first(drug_node, "drugbank-id[@primary='true']")
   if (identical(drug_id, "")) {
     return(result)
   }
 
-  drug_name <- xml_text_first(drug_node, "d:name")
-  indication <- xml_text_first(drug_node, "d:indication")
+  drug_name <- xml_text_first(drug_node, "name")
+  indication <- xml_text_first(drug_node, "indication")
   inchi <- calculated_property(drug_node, "InChI")
 
   result <- append_row(result, "drugs", list(
@@ -87,16 +82,16 @@ extract_core_drug <- function(drug_node, result) {
     source = "DrugBank"
   ))
 
-  target_nodes <- xml2::xml_find_all(drug_node, "d:targets/d:target", ns = drugbank_xml_ns())
+  target_nodes <- XML::getNodeSet(drug_node, "targets/target")
   for (target_node in target_nodes) {
-    target_id <- xml_attr_first(target_node, "d:polypeptide", "id")
+    target_id <- xml_attr_first(target_node, "polypeptide", "id")
     if (identical(target_id, "")) {
       next
     }
 
-    target_name <- xml_text_first(target_node, "d:name")
-    gene_name <- xml_text_first(target_node, "d:polypeptide/d:gene-name")
-    organism <- xml_text_first(target_node, "d:organism")
+    target_name <- xml_text_first(target_node, "name")
+    gene_name <- xml_text_first(target_node, "polypeptide/gene-name")
+    organism <- xml_text_first(target_node, "organism")
 
     result <- append_row(result, "targets", list(
       target_id = target_id,

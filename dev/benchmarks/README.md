@@ -2,7 +2,7 @@
 
 These scripts run fixture or full-XML smoke benchmarks for the current `dev/` parsers. They write parser output CSV files plus a small metrics JSON file with elapsed time and table row counts.
 
-Use fixture runs first. Full DrugBank XML runs can take much longer, especially for the current R parser while it still uses a fixture-sized XML tree fallback.
+Use fixture runs first. Full DrugBank XML runs can take much longer; the R parser is streaming but still slower than the Python implementation because it currently accumulates rows in base R data frames.
 
 ## Python
 
