@@ -81,6 +81,7 @@ write_drugbank_tables(result, "tmp_r_core_output", schema_dir = "../schema")
 ## Directory Guide
 
 - `dev/README.md`: detailed notes for the current rewrite.
+- `dev/benchmarks`: fixture and full-XML benchmark scripts.
 - `dev/python`: Python core parser package and tests.
 - `dev/R`: R core parser package and tests.
 - `dev/schema`: shared YAML table/profile definitions.

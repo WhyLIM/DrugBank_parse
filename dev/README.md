@@ -59,3 +59,14 @@ write_drugbank_tables(result, "tmp_r_core_output", schema_dir = "../schema")
 - `drug_target.csv`
 - `drug_indication.csv`
 - `target_drug_indication.csv`
+
+## Benchmarks
+
+Benchmark scripts live in `dev/benchmarks`. Start with the bundled fixture before running a full DrugBank XML file.
+
+From `dev/benchmarks`:
+
+```powershell
+D:\Anaconda3\python.exe python_benchmark.py --input ..\..\test-database.xml --outdir tmp_python_core --metrics tmp_python_core_metrics.json
+D:\R\R-4.5.3\bin\Rscript.exe r_benchmark.R --input ..\..\test-database.xml --outdir tmp_r_core --metrics tmp_r_core_metrics.json
+```
