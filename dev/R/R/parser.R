@@ -37,10 +37,10 @@ parse_drugbank_xml <- function(path, profile = "core", modules = NULL, schema_di
     schema_dir = schema_dir
   )
   tables <- resolve_tables(selected_modules, schema_dir = schema_dir)
-  result <- new_parse_result(tables)
+  result <- new_parse_accumulator(tables)
 
   if (length(tables) == 0) {
-    return(unname(result))
+    return(list())
   }
 
   if ("core" %in% selected_modules) {
@@ -57,6 +57,7 @@ parse_drugbank_xml <- function(path, profile = "core", modules = NULL, schema_di
     )
   }
 
+  result <- materialize_parse_result(result)
   deduplicate_table(result, "targets", key_fields = "target_id")
 }
 
@@ -70,13 +71,13 @@ extract_core_drug <- function(drug_node, result) {
   indication <- xml_text_first(drug_node, "indication")
   inchi <- calculated_property(drug_node, "InChI")
 
-  result <- append_row(result, "drugs", list(
+  result <- append_accumulated_row(result, "drugs", list(
     drug_id = drug_id,
     drug_name = drug_name,
     inchi = inchi,
     source = "DrugBank"
   ))
-  result <- append_row(result, "drug_indication", list(
+  result <- append_accumulated_row(result, "drug_indication", list(
     drug_id = drug_id,
     indication = indication,
     source = "DrugBank"
@@ -93,19 +94,19 @@ extract_core_drug <- function(drug_node, result) {
     gene_name <- xml_text_first(target_node, "polypeptide/gene-name")
     organism <- xml_text_first(target_node, "organism")
 
-    result <- append_row(result, "targets", list(
+    result <- append_accumulated_row(result, "targets", list(
       target_id = target_id,
       target_name = target_name,
       gene_name = gene_name,
       organism = organism,
       source = "DrugBank"
     ))
-    result <- append_row(result, "drug_target", list(
+    result <- append_accumulated_row(result, "drug_target", list(
       drug_id = drug_id,
       target_id = target_id,
       source = "DrugBank"
     ))
-    result <- append_row(result, "target_drug_indication", list(
+    result <- append_accumulated_row(result, "target_drug_indication", list(
       target_id = target_id,
       gene_name = gene_name,
       drug_id = drug_id,

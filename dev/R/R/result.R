@@ -31,3 +31,48 @@ append_row <- function(result, table, row) {
   rownames(result[[table]]) <- NULL
   result
 }
+
+new_parse_accumulator <- function(tables) {
+  stats::setNames(vector("list", length(tables)), tables)
+}
+
+append_accumulated_row <- function(result, table, row) {
+  if (!table %in% names(result)) {
+    stop(sprintf("Table is not enabled for this parse result: %s", table), call. = FALSE)
+  }
+
+  result[[table]][[length(result[[table]]) + 1L]] <- as.list(row)
+  result
+}
+
+materialize_rows <- function(rows) {
+  if (length(rows) == 0) {
+    return(data.frame(stringsAsFactors = FALSE))
+  }
+
+  columns <- unique(unlist(lapply(rows, names), use.names = FALSE))
+  data <- stats::setNames(vector("list", length(columns)), columns)
+
+  for (column in columns) {
+    data[[column]] <- vapply(
+      rows,
+      function(row) {
+        value <- row[[column]]
+        if (is.null(value) || length(value) == 0) {
+          return(NA_character_)
+        }
+        as.character(value[[1]])
+      },
+      character(1)
+    )
+  }
+
+  data.frame(data, stringsAsFactors = FALSE, check.names = FALSE)
+}
+
+materialize_parse_result <- function(result) {
+  for (table in names(result)) {
+    result[[table]] <- materialize_rows(result[[table]])
+  }
+  result
+}

@@ -43,3 +43,12 @@ Each metrics JSON includes:
 - `elapsed_seconds`
 - `table_rows`
 - `written_files`
+
+## Local Full XML Baseline
+
+On `drugbank_5-1-12.xml` in this workspace:
+
+- Python core parser: about `59.13` seconds, with `27.844 MB` Python tracemalloc peak memory.
+- R core parser: about `240.59` seconds after list-accumulator optimization.
+
+Both implementations produced matching CSV content for the five core tables.
